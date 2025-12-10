@@ -17,14 +17,12 @@ export function useAdaptiveAnimation(config: AnimationConfig) {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const animationClass = useMemo(() => {
-    // Si l'utilisateur préfère les animations réduites, retourner une classe vide
     if (prefersReducedMotion) {
       return '';
     }
 
     let baseClass = '';
 
-    // Déterminer la classe d'animation de base
     switch (config.type) {
       case 'fade':
         if (config.direction) {
@@ -70,7 +68,6 @@ export function useAdaptiveAnimation(config: AnimationConfig) {
         baseClass = 'animate-fade-in';
     }
 
-    // Ajouter des classes de durée
     let durationClass = '';
     switch (config.duration) {
       case 'fast':
@@ -83,13 +80,11 @@ export function useAdaptiveAnimation(config: AnimationConfig) {
         durationClass = '';
     }
 
-    // Ajouter le délai d'animation si spécifié
     let delayClass = '';
     if (config.delay && config.delay > 0) {
       delayClass = `[animation-delay:${config.delay}ms]`;
     }
 
-    // Ajouter la classe d'animation infinie si spécifiée
     let infiniteClass = '';
     if (config.infinite) {
       infiniteClass = '[animation-iteration-count:infinite]';
@@ -105,10 +100,9 @@ export function useAdaptiveAnimation(config: AnimationConfig) {
 }
 
 /**
- * Hook pour vérifier si l'utilisateur préfère les animations réduites
+ * Hook для проверки предпочтения пользователя о сокращенных анимациях
  */
 export function usePrefersReducedMotion(): boolean {
-  // Vérifier la préférence au moment du rendu
   if (typeof window !== 'undefined') {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
@@ -116,35 +110,9 @@ export function usePrefersReducedMotion(): boolean {
 }
 
 /**
- * Composant wrapper pour appliquer les animations adaptatives facilement
- */
-interface AdaptiveAnimationProps {
-  children: React.ReactNode;
-  config: AnimationConfig;
-  className?: string;
-  as?: React.ElementType;
-}
-
-export function AdaptiveAnimation({
-  children,
-  config,
-  className,
-  as: Component = 'div',
-}: AdaptiveAnimationProps) {
-  const { className: animationClass } = useAdaptiveAnimation(config);
-
-  return (
-    <Component className={`${animationClass} ${className || ''}`.trim()}>
-      {children}
-    </Component>
-  );
-}
-
-/**
- * Collection de configurations d'animations pré-définies
+ * Коллекция пред-определенных конфигураций анимаций
  */
 export const animationPresets = {
-  // Animations d'entrée
   fadeIn: {
     type: 'fade' as const,
     duration: 'normal' as const,
@@ -169,8 +137,6 @@ export const animationPresets = {
     direction: 'right' as const,
     duration: 'normal' as const,
   },
-
-  // Animations de glissement
   slideInDown: {
     type: 'slide' as const,
     direction: 'down' as const,
@@ -180,20 +146,14 @@ export const animationPresets = {
     type: 'slide' as const,
     duration: 'normal' as const,
   },
-
-  // Animations d'échelle
   scaleIn: {
     type: 'scale' as const,
     duration: 'fast' as const,
   },
-
-  // Animations de rebond
   bounceIn: {
     type: 'bounce' as const,
     duration: 'slow' as const,
   },
-
-  // Animations en boucle
   float: {
     type: 'float' as const,
     infinite: true,
@@ -206,8 +166,6 @@ export const animationPresets = {
     type: 'shimmer' as const,
     infinite: true,
   },
-
-  // Animation de rotation
   rotateIn: {
     type: 'rotate' as const,
     duration: 'normal' as const,
