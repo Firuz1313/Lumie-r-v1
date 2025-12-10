@@ -355,11 +355,15 @@ export async function fetchCategories(): Promise<Category[]> {
 }
 
 export async function searchContent(query: string): Promise<ContentItem[]> {
-  // TODO: Заменить на реальный API вызов
   const allContent = [...mockPremiers, ...mockPopular, ...mockKidsContent, ...mockFreeContent];
   return Promise.resolve(
-    allContent.filter(item => 
+    allContent.filter(item =>
       item.title.toLowerCase().includes(query.toLowerCase())
     )
   );
+}
+
+// Функция для получения всего контента
+export function getAllContent(): ContentItem[] {
+  return [...mockPremiers, ...mockPopular, ...mockKidsContent, ...mockFreeContent];
 }
