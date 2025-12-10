@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Header } from '@/components/Header';
+import { BannerHero } from '@/components/BannerHero';
 import { Footer } from '@/components/Footer';
 import { CollectionCard } from '@/components/CollectionCard';
 import { fetchCollections, type Collection } from '@/lib/api';
@@ -44,36 +45,14 @@ const Collections = () => {
     <div className="min-h-screen">
       <Header />
       
-      {/* Hero баннер - в стиле киносайта */}
       {featuredCollection && (
-        <section className="relative h-[85vh] lg:h-[90vh] overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: featuredCollection.image ? `url(${featuredCollection.image})` : undefined }}
-          >
-            <div className={`absolute inset-0 bg-gradient-to-br ${featuredCollection.gradient} opacity-90`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
-          </div>
-          
-          <div className="absolute inset-0 flex items-end">
-            <div className="container mx-auto px-4 lg:px-8 pb-16 lg:pb-24 w-full">
-              <div className="max-w-3xl space-y-4">
-                <span className="inline-block px-3 py-1 text-xs font-bold uppercase bg-purple-500 text-white">
-                  Коллекция
-                </span>
-                
-                <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black text-white leading-tight drop-shadow-2xl">
-                  {featuredCollection.name}
-                </h1>
-                
-                <p className="text-white/90 text-base lg:text-lg max-w-2xl leading-relaxed">
-                  Откройте для себя лучшие подборки контента, собранные специально для вас
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <BannerHero
+          type="collections"
+          title={featuredCollection.name}
+          subtitle="Откройте для себя лучшие подборки контента, собранные специально для вас"
+          backgroundImage={featuredCollection.image}
+          showNav={false}
+        />
       )}
       
       <main className="relative z-10 pt-12 lg:pt-16 pb-16">
