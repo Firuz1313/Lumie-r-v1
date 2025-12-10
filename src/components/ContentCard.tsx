@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { LazyImage } from './LazyImage';
 import type { ContentItem } from '@/lib/api';
 
 interface ContentCardProps {
@@ -10,7 +11,8 @@ interface ContentCardProps {
 export function ContentCard({ item, variant = 'default', className }: ContentCardProps) {
   const typeLabel = item.type === 'movie' ? 'Фильм' : 'Сериал';
   const isHero = variant === 'hero';
-  
+  const imageUrl = isHero ? (item.backdrop || item.poster) : item.poster;
+
   return (
     <a
       href={`/watch/${item.id}`}
@@ -22,18 +24,20 @@ export function ContentCard({ item, variant = 'default', className }: ContentCar
         className
       )}
     >
-      {/* Постер */}
-      <img
-        src={isHero ? (item.backdrop || item.poster) : item.poster}
-        alt={item.title}
-        className={cn(
-          "w-full h-full object-cover transition-transform duration-500",
-          "group-hover:scale-110"
-        )}
-      />
-      
-      {/* Градиент затемнения */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent opacity-75" />
+      {/* Постер с lazy-loading */}
+      <div className="relative w-full h-full">
+        <LazyImage
+          src={imageUrl}
+          alt={item.title}
+          className={cn(
+            "w-full h-full object-cover transition-transform duration-500",
+            "group-hover:scale-110"
+          )}
+        />
+
+        {/* Градиент затемнения */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent opacity-75" />
+      </div>
       
       {/* Бейдж типа контента */}
       <div className="absolute top-3 left-3">
