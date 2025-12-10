@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Header } from '@/components/Header';
-import { HeroSection } from '@/components/HeroSection';
+import { BannerHero } from '@/components/BannerHero';
 import { ContentRow } from '@/components/ContentRow';
 import { Footer } from '@/components/Footer';
 import { fetchFreeContent, fetchPopular, type ContentItem } from '@/lib/api';
@@ -48,8 +48,12 @@ const Free = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      
-      <HeroSection items={freeContent.slice(0, 3)} />
+
+      <BannerHero
+        type="free"
+        items={freeContent.slice(0, 5)}
+        showNav={true}
+      />
       
       <main className="relative z-10 pt-12 lg:pt-16 pb-16">
         <div className="container mx-auto px-4 lg:px-8 mb-6">
