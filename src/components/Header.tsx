@@ -3,7 +3,7 @@ import { Search, Menu, Home, Smile, Gift, Dumbbell, Grid3X3, Tv } from 'lucide-r
 import { useNavigate, useLocation } from 'react-router-dom';
 import logoLumiere from '@/assets/logo-lumiere.png';
 import { Button } from '@/components/ui/button';
-import { SearchModal } from './SearchModal';
+import { AdvancedSearchModal } from './AdvancedSearchModal';
 import { cn } from '@/lib/utils';
 
 interface NavItem {
@@ -111,7 +111,7 @@ export function Header() {
       </header>
 
       {/* Модальное окно поиска */}
-      <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />
+      <AdvancedSearchModal open={searchOpen} onOpenChange={setSearchOpen} />
     </>
   );
 }

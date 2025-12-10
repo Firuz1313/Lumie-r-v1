@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
-import { ArrowLeft, Search } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Search } from 'lucide-react';
 import { Header } from '@/components/Header';
+import { BannerHero } from '@/components/BannerHero';
 import { CategoryCard } from '@/components/CategoryCard';
 import { ContentRow } from '@/components/ContentRow';
 import { mockPremiers, mockPopular } from '@/lib/api';
@@ -39,7 +39,6 @@ const categories = [
 ];
 
 export default function Catalog() {
-  const navigate = useNavigate();
   const [search, setSearch] = useState('');
 
   const filteredCategories = useMemo(() => {
@@ -51,43 +50,14 @@ export default function Catalog() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      
-      {/* Hero баннер - в стиле киносайта */}
-      <section className="relative h-[85vh] lg:h-[90vh] overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1920&h=1080&fit=crop)' }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
-        </div>
-        
-        <div className="absolute inset-0 flex items-end">
-          <div className="container mx-auto px-4 lg:px-8 pb-16 lg:pb-24 w-full">
-            <div className="max-w-3xl space-y-4">
-              <button
-                onClick={() => navigate(-1)}
-                className="flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-2"
-              >
-                <ArrowLeft className="w-5 h-5" />
-                <span className="text-sm">Назад</span>
-              </button>
-              
-              <span className="inline-block px-3 py-1 text-xs font-bold uppercase bg-primary text-primary-foreground">
-                Каталог
-              </span>
-              
-              <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black text-white leading-tight drop-shadow-2xl">
-                Найдите свой фильм
-              </h1>
-              
-              <p className="text-white/90 text-base lg:text-lg max-w-2xl leading-relaxed">
-                Исследуйте тысячи фильмов, сериалов и шоу в нашем каталоге
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+
+      <BannerHero
+        type="catalog"
+        title="Найдите свой фильм"
+        subtitle="Исследуйте тысячи фильмов, сериалов и шоу в нашем каталоге"
+        backgroundImage="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1920&h=1080&fit=crop"
+        showNav={false}
+      />
 
       {/* Контент */}
       <div className="relative z-10 container mx-auto px-4 lg:px-8 space-y-10 pt-12 lg:pt-16 pb-16">

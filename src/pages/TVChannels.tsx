@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Header } from '@/components/Header';
+import { BannerHero } from '@/components/BannerHero';
 import { Footer } from '@/components/Footer';
 import { fetchTVChannels, type TVChannel } from '@/lib/api';
 import { Tv, Play, Search } from 'lucide-react';
@@ -96,34 +97,13 @@ const TVChannels = () => {
     <div className="min-h-screen">
       <Header />
       
-      {/* Hero баннер - в стиле киносайта */}
-      <section className="relative h-[85vh] lg:h-[90vh] overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=1920&h=1080&fit=crop)' }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
-        </div>
-        
-        <div className="absolute inset-0 flex items-end">
-          <div className="container mx-auto px-4 lg:px-8 pb-16 lg:pb-24 w-full">
-            <div className="max-w-3xl space-y-4">
-              <span className="inline-block px-3 py-1 text-xs font-bold uppercase bg-blue-500 text-white">
-                Прямой эфир
-              </span>
-              
-              <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black text-white leading-tight drop-shadow-2xl">
-                ТВ каналы
-              </h1>
-              
-              <p className="text-white/90 text-base lg:text-lg max-w-2xl leading-relaxed">
-                Смотрите любимые телеканалы в прямом эфире в любое время
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <BannerHero
+        type="tv"
+        title="ТВ каналы"
+        subtitle="Смотрите любимые телеканалы в прямом эфире в любое время"
+        backgroundImage="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=1920&h=1080&fit=crop"
+        showNav={false}
+      />
       
       <main className="relative z-10 pt-12 lg:pt-16 pb-16">
         <div className="container mx-auto px-4 lg:px-8">
