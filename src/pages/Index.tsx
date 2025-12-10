@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Header } from '@/components/Header';
-import { HeroSection } from '@/components/HeroSection';
+import { BannerHero } from '@/components/BannerHero';
 import { ContentRow } from '@/components/ContentRow';
 import { Footer } from '@/components/Footer';
 import { fetchPremiers, fetchPopular, type ContentItem } from '@/lib/api';
@@ -10,7 +10,6 @@ const Index = () => {
   const [popular, setPopular] = useState<ContentItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Загрузка данных с API
   useEffect(() => {
     async function loadContent() {
       try {
@@ -39,44 +38,40 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Шапка сайта */}
       <Header />
-      
-      {/* Главный баннер */}
-      <HeroSection items={premiers} />
-      
-      {/* Секции контента */}
+
+      <BannerHero
+        type="home"
+        items={premiers}
+        showNav={true}
+      />
+
       <main className="relative z-10 pt-12 lg:pt-16 pb-16">
-        {/* Премьеры месяца */}
-        <ContentRow 
-          title="Премьеры месяца" 
-          items={premiers} 
-          variant="hero" 
+        <ContentRow
+          title="Премьеры месяца"
+          items={premiers}
+          variant="hero"
         />
-        
-        {/* Популярное для вас */}
-        <ContentRow 
-          title="Популярное для вас" 
-          items={popular} 
-          variant="default" 
+
+        <ContentRow
+          title="Популярное для вас"
+          items={popular}
+          variant="default"
         />
-        
-        {/* Сериалы */}
-        <ContentRow 
-          title="Лучшие сериалы" 
-          items={popular.filter(item => item.type === 'series')} 
-          variant="default" 
+
+        <ContentRow
+          title="Лучшие сериалы"
+          items={popular.filter(item => item.type === 'series')}
+          variant="default"
         />
-        
-        {/* Фильмы */}
-        <ContentRow 
-          title="Новые фильмы" 
-          items={premiers.filter(item => item.type === 'movie')} 
-          variant="default" 
+
+        <ContentRow
+          title="Новые фильмы"
+          items={premiers.filter(item => item.type === 'movie')}
+          variant="default"
         />
       </main>
 
-      {/* Футер */}
       <Footer />
     </div>
   );
